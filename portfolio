@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NITESH PORTFOLIO</title>
+  <style>
+    :root {
+      --primary-color: #447c8a;
+      --secondary-color: #F5A623;
+      --background-color: #d6c7c7;
+      --text-color: #190041;
+      --header-color: #114b5a;
+      --footer-color: #a7d488fb;
+
+      --night-background: #2C2C2C;
+      --night-text: #EDEDED;
+
+      --transition-time: 0.5s;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color var(--transition-time), color var(--transition-time);
+      overflow-x: hidden;
+    }
+
+    /* Floating Background Bubbles */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(211, 155, 155, 0.884);
+      border-radius: 50%;
+      animation: rise 15s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(-1200px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    header {
+      background: linear-gradient(270deg, var(--header-color), var(--secondary-color), var(--primary-color));
+      background-size: 400% 400%;
+      animation: gradientMove 8s ease infinite;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      color: rgb(177, 214, 214);
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0.5em 0;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    article {
+      background-color: hwb(0 73% 9% / 0.904);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 25px;
+      animation: fadeInUp 1.2s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    article:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      background-color: var(--footer-color);
+      color: #8462c9;
+      text-align: center;
+      padding: 15px 10px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 8px rgba(218, 195, 195, 0.863);
+    }
+
+    /* Footer Buttons with Icons */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .social-links .btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--secondary-color);
+      color: #453655;
+      padding: 10px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-links .btn:hover {
+      background-color: var(--primary-color);
+      transform: scale(1.05);
+    }
+
+    .social-links i {
+      font-size: 1.2em;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color var(--transition-time);
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Night Mode */
+    body.night-mode {
+      background-color: var(--night-background);
+      color: var(--night-text);
+    }
+
+    body.night-mode article {
+      background-color: #383131;
+    }
+
+    body.night-mode a {
+      color: #f0c674;
+    }
+
+    /* Toggle Button */
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: #af0a0a;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toggle-button:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 0 15px var(--secondary-color);
+      transform: scale(1.1);
+    }
+
+    /* Color palette buttons */
+    .palette {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .color-box {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #a86868;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .color-box:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Animation -->
+  <div class="bubbles">
+    <div class="bubble" style="width:40px; height:40px; left:10%; animation-duration:12s;"></div>
+    <div class="bubble" style="width:25px; height:25px; left:30%; animation-duration:18s;"></div>
+    <div class="bubble" style="width:60px; height:60px; left:50%; animation-duration:20s;"></div>
+    <div class="bubble" style="width:20px; height:20px; left:70%; animation-duration:14s;"></div>
+    <div class="bubble" style="width:45px; height:45px; left:90%; animation-duration:22s;"></div>
+  </div>
+
+  <button class="toggle-button" onclick="toggleMode()">🌙</button>
+
+  <header>
+    <h1>TANSFORMING VISION INTO REALITY</h1>
+    <h2>
+      Exploring limitless possibilities with creativity and innovation.
+    </h2>
+    <h3>
+      “student of internet of things | AI & Robotics Enthusiast | Web Developer | Innovator | Problem Solver”
+    </h3>
+  </header>
+  <main>
+    <p>
+    <h2>
+      Hi, I am Nitesh chaurasiya
+    </h2>
+    </p>
+    <p>
+    <h3>
+      WHO AM I
+    </h3>
+    Welcome to my portfolio! I am Nitesh, a passionate student of Internet of Things (IoT) and an enthusiast in
+    the fields of Artificial Intelligence (AI) and Robotics. With a keen interest in web development, I strive
+    to create innovative solutions that bridge the gap between technology and everyday life.
+    </p>
+    <p>
+    <h3>
+      WHAT I DO
+    </h3>
+    I specialize in developing IoT applications that connect devices and enable seamless communication. My
+    expertise extends to AI and robotics, where I explore cutting-edge technologies to build intelligent systems.
+    </p>
+    <section>
+      <article>
+
+        <h2>💡 Skills</h2>
+
+        <!-- Technical Skills -->
+        <h3>⚙️ Technical Skills</h3>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="fab fa-python"></i>
+            <p>Python</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-code"></i>
+            <p>C / C++</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-js"></i>
+            <p>JavaScript</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-html5"></i>
+            <p>HTML</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-css3-alt"></i>
+            <p>CSS</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-react"></i>
+            <p>React</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-microchip"></i>
+            <p>Arduino, Raspberry Pi, ESP8266</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-robot"></i>
+            <p>AI, ML & Robotics (TensorFlow, OpenCV, ROS)</p>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <h3>🤝 Soft Skills</h3>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="fas fa-lightbulb"></i>
+            <p>Problem Solving</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-paint-brush"></i>
+            <p>Creativity</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-users"></i>
+            <p>Teamwork</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-clock"></i>
+            <p>Time Management</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-comments"></i>
+            <p>Communication</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-sync-alt"></i>
+            <p>Adaptability</p>
+          </div>
+        </div>
+
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <style>
+          .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+          }
+
+          .skill-card {
+            background: #a3d1c3;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.425);
+          }
+
+          .skill-card i {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+          }
+
+          .skill-card:hover {
+            background: var(--primary-color);
+            color: rgb(219, 186, 186);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          .skill-card:hover i {
+            transform: rotate(15deg) scale(1.2);
+            color: #9ce5dc;
+          }
+
+          .skill-card p {
+            font-size: 14px;
+            margin: 0;
+          }
+        </style>
+        <h2>
+          Bio data
+        </h2>
+        <table border="5px" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Nitesh chaurasiya</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>Agra,India <strong>(THE CITY OF TAJ)</strong></td>
+            </tr>
+          </thead>
+        </table>
+        <hr>
+        <b>Thank you for taking the time to visit my portfolio. This is my very first website, and I’ve created
+          it to share my journey, skills, and projects with you. I am continuously learning and improving, so
+          your support and feedback mean a lot to me. Excited to grow further and keep building better
+          versions of myself and my work!</b>
+      </article>
+    </section>
+  </main>
+  <footer>
+
+    <div>
+      <h2>Contact Me</h2>
+      <div class="social-links">
+        <div><a href="https://www.instagram.com/niteshh._._/" target="_blank" class="btn"><i
+              class="fab fa-instagram"></i>Instagram</a>
+        </div>
+        <div><a href="https://www.linkedin.com/in/nitesh-chaurasiya-661097382" target="_blank" class="btn"><i
+              class="fab fa-linkedin"></i>LinkedIn</a>
+        </div>
+        <div><a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=niteshchaurasiya966@gmail.com&su=Hello%20Nitesh&body=I%20visited%20your%20portfolio!"
+            target=" _blank" class="btn"><i class="fas fa-envelope"></i> Email Me</a></div>
+        <div><a href="https://github.com/created-Y-nitesh/" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a></div>
+        <div><a href="https://t.me/chaurasiya_g" target="_blank" class="btn"><i class="fab fa-telegram"></i>Telegram</a></div>
+      </div>
+      <p><strong>© 2025 Nitesh Chaurasiya. All rights reserved.</strong></p>
+
+    </div>
+  </footer>
+
+  <!-- Color Palette -->
+  <div class="palette">
+    <div class="color-box" style="background:#5eb6cc;" onclick="setTheme('#447c8a','#F5A623')"></div>
+    <div class="color-box" style="background:#6a1b9a;" onclick="setTheme('#6a1b9a','#ff9800')"></div>
+    <div class="color-box" style="background:#2e7d32;" onclick="setTheme('#2e7d32','#f44336')"></div>
+    <div class="color-box" style="background:#1565c0;" onclick="setTheme('#1565c0','#ffd600')"></div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("night-mode");
+    }
+
+    function setTheme(primary, secondary) {
+      document.documentElement.style.setProperty('--primary-color', primary);
+      document.documentElement.style.setProperty('--secondary-color', secondary);
+    }
+  </script>
+
+</body>
+
+</html>
